@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                http://www.springframework.org/schema/jdbc
+                http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+    <context:component-scan base-package="ru.gribnoff.testcase4springsecurity"/>
+    <context:annotation-config/>
+    <bean id="userService" class="ru.gribnoff.testcase4springsecurity.service.UserServiceImpl"/>
+    <bean id="userDao" class="ru.gribnoff.testcase4springsecurity.persistence.repository.UserDAOImpl"/>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="org.h2.Driver"/>-->
+<!--        <property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:/sql/users.sql'"/>-->
+<!--        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>-->
+<!--        <property name="url" value="jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:/sql/users.sql'"/>-->
+<!--        <property name="username" value="sa"/>-->
+<!--        <property name="password" value="sa"/>-->
+<!--    </bean>-->
+
+
+<!--    <mvc:resources mapping="/resources/**" location="/resources/" />-->
+
+    <!-- Use in-memory embedded H2 database -->
+<!--    <jdbc:embedded-database id="dataSource" type="H2">-->
+    <jdbc:embedded-database id="dataSource" type="HSQL">
+        <jdbc:script location="classpath:sql/users.sql"/>
+    </jdbc:embedded-database>
+
+    <!-- Run HSQLDB DB manager after app start -->
+<!--    <bean depends-on="dataSource" class="org.springframework.beans.factory.config.MethodInvokingBean">-->
+<!--        <property name="targetClass" value="org.hsqldb.util.DatabaseManagerSwing" />-->
+<!--        <property name="targetMethod" value="main" />-->
+<!--        <property name="arguments">-->
+<!--            <list>-->
+<!--                <value>&#45;&#45;url</value>-->
+<!--                <value>jdbc:hsqldb:mem:testdb</value>-->
+<!--                <value>&#45;&#45;user</value>-->
+<!--                <value>sa</value>-->
+<!--                <value>&#45;&#45;password</value>-->
+<!--                <value></value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--     Run H2 web server within application that will access the same in-memory database -->
+<!--    <bean id="h2Server" class="org.hsqldb.server.WebServer" factory-method="createTcpServer" init-method="start" destroy-method="stop" depends-on="h2WebServer">-->
+<!--        <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>-->
+<!--    </bean>-->
+<!--    <bean id="h2WebServer" class="org.hsqldb.server.Server" factory-method="createWebServer" init-method="start" destroy-method="stop">-->
+<!--        <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/>-->
+<!--    </bean>-->
+</beans>
