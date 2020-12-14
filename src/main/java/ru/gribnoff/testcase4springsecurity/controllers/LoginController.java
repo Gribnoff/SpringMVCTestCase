@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.gribnoff.testcase4springsecurity.exceptions.IncorrectPasswordException;
-import ru.gribnoff.testcase4springsecurity.exceptions.UserNotFoundException;
 import ru.gribnoff.testcase4springsecurity.persistence.entity.Login;
 import ru.gribnoff.testcase4springsecurity.persistence.entity.User;
 import ru.gribnoff.testcase4springsecurity.service.UserService;
@@ -24,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping("/loginProcess")
-    public String loginProcess(Model model, @ModelAttribute Login login) throws UserNotFoundException, IncorrectPasswordException {
+    public String loginProcess(Model model, @ModelAttribute Login login){
         User user = userService.validateUser(login);
         model.addAttribute("user", user);
         return "profilePage";
