@@ -20,6 +20,7 @@ repositories {
 ext {
     junitVersion = '5.7.0'
     springVersion = '5.3.2'
+    springSecurityVersion = '5.4.2'
     servletApiVersion = '4.0.1'
     jstlVersion = '1.2'
     lombokVersion = '1.18.16'
@@ -45,6 +46,8 @@ dependencies {
 
     implementation ("org.springframework:spring-webmvc:${springVersion}")
     implementation ("org.springframework:spring-jdbc:${springVersion}")
+    implementation ("org.springframework.security:spring-security-web:${springSecurityVersion}")
+    implementation ("org.springframework.security:spring-security-config:${springSecurityVersion}")
 
 
 //    testImplementation 'org.springframework.security:spring-security-test'

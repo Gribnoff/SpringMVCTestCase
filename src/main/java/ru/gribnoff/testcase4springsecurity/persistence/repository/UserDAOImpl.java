@@ -19,21 +19,32 @@ public class UserDAOImpl implements UserDAO {
     private final DataSource datasource;
     private final JdbcTemplate jdbcTemplate;
 
-    @Override
-    public int register(User user) {
-        String sql = "insert into \"users\" values(?,?,?)";
-
-        return jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), 0.);
-    }
 
     @Override
-    public User validateUser(Login login) {
-        String sql = "select * from \"users\" where \"username\"='" + login.getUsername() +
-                "' and \"password\"='" + login.getPassword() +"'";
-
+    public User findByUsername(String username) {
+        String sql = "select * from \"users\" where \"username\"='" + username + "'";
         List<User> users = jdbcTemplate.query(sql, new UserMapper());
 
         return users.size() > 0 ? users.get(0) : null;
+    }
+
+    @Override
+    public int register(User user) {
+        String sql = "insert into \"users\" values(?,?,?,?)";
+
+        return jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), 0., "ROLE_USER");
+    }
+
+    @Override
+    public int validateUser(Login login) {
+        User user = findByUsername(login.getUsername());
+
+        if (user == null)
+            return 3;
+        else if (!user.getPassword().equals(login.getPassword()))
+            return 4;
+
+        return 0;
     }
 }
 

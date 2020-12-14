@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation=
@@ -65,4 +66,14 @@
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions" value="/WEB-INF/tiles.xml"/>
     </bean>
+
+<!--    <security:authentication-manager>-->
+<!--        <security:authentication-provider ref="daoAuthenticationProvider" />-->
+<!--    </security:authentication-manager>-->
+
+<!--    <bean id="daoAuthenticationProvider"-->
+<!--          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider" >-->
+<!--        <property name="userDetailsService" ref="myAuthorizationService" />-->
+<!--    </bean>-->
+
 </beans>
