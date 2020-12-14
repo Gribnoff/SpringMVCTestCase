@@ -21,9 +21,11 @@ ext {
     junitVersion = '5.7.0'
     springVersion = '5.3.2'
     servletApiVersion = '4.0.1'
+    jstlVersion = '1.2'
     lombokVersion = '1.18.16'
 //    h2Version = '1.4.200'
     hsqldbVersion = '2.5.1'
+    tilesVersion = '3.0.8'
 }
 
 sourceCompatibility = 1.8
@@ -31,7 +33,9 @@ targetCompatibility = 1.8
 
 dependencies {
 //    compileOnly('javax.mvc:javax.mvc-api:1.0.0')
+    implementation("org.apache.tiles:tiles-jsp:${tilesVersion}")
     compileOnly("javax.servlet:javax.servlet-api:${servletApiVersion}")
+    implementation("javax.servlet:jstl:${jstlVersion}")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
